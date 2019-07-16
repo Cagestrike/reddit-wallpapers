@@ -1,10 +1,24 @@
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+});
+
 const electron = require('electron');
 const { ipcRenderer } = electron;
+const Store = require('electron-store');
+const store = new Store();
 
 const wallpaper = document.getElementById('main-wallpaper');
+const getNewBtn = document.getElementById('get-new');
+const selectField = document.getElementById('subreddit-select');
+const favouriteBtn = document.getElementById('set-favourite');
+
+getNewBtn.addEventListener('click', e => {
+    getWallpaper(selectField.value || 'wallpapers');
+});
 
 function getWallpaper(subreddit) {
-    wallpaper.src = "Double Ring-1.5s-200px.svg";
+    wallpaper.src = "svg/Double Ring-1.5s-200px.svg";
     let url = new URL(`https://www.reddit.com/r/${subreddit}/top/.json`);
     let params = {
         't': 'day',
@@ -16,9 +30,7 @@ function getWallpaper(subreddit) {
             return response.json();
         })
         .then(function (myJson) {
-            console.log(myJson)
             const topPost = myJson.data.children[0];
-            console.log(topPost);
             const imageThumbnail = topPost.data.thumbnail;
             const imageURL = topPost.data.url;
             wallpaper.src = imageURL;
@@ -30,6 +42,7 @@ getWallpaper('wallpapers');
 
 document.getElementById('set-wallpaper').addEventListener('click', setWallpaper);
 
+
 function setWallpaper(e) {
     const imageURL = wallpaper.src;
     ipcRenderer.send('wallpaper:url', imageURL);
@@ -38,14 +51,11 @@ function setWallpaper(e) {
         document.getElementById('dl-progress').innerText = 'Download finished!';
     })
 }
-// let response = await fetch(url);
-// let myJson = await response.json();
 
-// params.after = myJson.data.after;
-
-// console.log(params);
-
-// url.search = new URLSearchParams(params);
-
-// response = await fetch(url);
-// myJson = await response.json();
+favouriteBtn.addEventListener('click', e => {
+    const imageURL = wallpaper.src;
+    const imageName = imageURL.split('/').pop();
+    // store.set(String(store.size), imageURL);
+    store.set(imageName.split('.').shift(), imageURL);
+    // store.set(imageName, imageURL);
+})

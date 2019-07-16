@@ -1,3 +1,14 @@
+/* * {
+    margin: 0;
+    padding: 0;
+}
+
+*/
+
+h3 {
+    margin-top: 0;
+}
+
 #main-wallpaper {
     display: block;
     margin: 0 auto;
@@ -10,4 +21,55 @@
     /* padding: 16px; */
     height: 300px;
     align-items: center;
+}
+
+.input-field {
+    width: 30%;
+    /* margin: 0 auto; */
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#get-new {
+    margin-left: 16px;
+}
+
+aside {
+    /* display: block; */
+    position: fixed;
+    background-color: lightgray;
+    height: 100%;
+    width: 75px;
+}
+
+.svg-icon {
+    width: 35px;
+    display: block;
+    margin: 0 auto;
+    color: white
+}
+
+li {
+    padding: 10px 0;
+    margin: 8px 0;
+    transition: .3s ease-out;
+}
+
+
+li.active {
+    background-color: #26a69a;
+}
+
+li:hover {
+    background-color: #2bbbad;
+}
+
+.card-action button {
+    width: 95%;
+    display: block;
+    margin: 8px auto;
 }

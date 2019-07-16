@@ -6,20 +6,45 @@
   <title></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body>
+  <aside>
+    <ul>
+      <li class="active"><a href="#"><img class="svg-icon" src="svg/home.svg" alt=""></a></li>
+      <li><a href="favourites.html"><img class="svg-icon" src="svg/heart.svg" alt=""></a></li>
+    </ul>
+  </aside>
   <div class="container">
     <h3 class="center-align">Wallpaper of the day</h3>
+    <div class="flex">
+      <div class="input-field">
+        <select name="" id="subreddit-select">
+          <option value="" disabled selected>--Choose a subreddit--</option>
+          <option value="wallpapers">r/wallpapers</option>
+          <option value="earthporn">r/earthporn (very cool nature pictures, not actual porn!)</option>
+          <option value="wallpaper">r/wallpaper</option>
+        </select>
+      </div>
+      <p class="center-align">
+        <button id="get-new" class="waves-effect waves-light btn-small">Get new wallpaper</button>
+      </p>
+    </div>
+
     <div class="wallpaper-container">
+      <!-- wallpapers, earthporn, wallpaper,  -->
       <img id="main-wallpaper" src="" class="responsive-img">
     </div>
     <p class="center-align">
       <button id="set-wallpaper" class="waves-effect waves-light btn">Set as wallpaper</button>
+      <button id="set-favourite" class="waves-effect waves-light btn">Add to favourites</button>
     </p>
     <p class="center-align" id="dl-progress"></p>
   </div>
-  <script src="request.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="script.js"></script>
 
 </body>
 

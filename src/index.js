@@ -16,8 +16,8 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    // minWidth: 800,
-    // minHeight: 600,
+    minWidth: 800,
+    minHeight: 600,
     useContentWidth: true,
     webPreferences: { nodeIntegration: true },
   });
@@ -26,7 +26,7 @@ const createWindow = () => {
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
@@ -64,25 +64,6 @@ app.on('activate', () => {
 
 //Catch wallpaper:url
 ipcMain.on('wallpaper:url', function (e, url) {
-  // (async () => {
-  //   await wallpaper.set('test.jpg');
-
-  //   await wallpaper.get();
-  //   //=> '/Users/sindresorhus/unicorn.jpg'
-  // })();
-
-  // // console.log(url);
-  // wallpaper.set('test.jpg');
-
-  // wallpaper.get().then(path => {
-  //   console.log(path);
-  // });
-  // //=> '/Users/sindresorhus/unicorn.jpg'
-  // let python = require('child_process').spawn('python', ['setWallpaper.py']);
-  // python.stdout.on('data', function (data) {
-  //   console.log('data: ', data.toString('utf8'));
-  // })
-
   let ps = require('python-shell');
   let imageName = url.split('/').pop();
   let options = {
@@ -94,6 +75,7 @@ ipcMain.on('wallpaper:url', function (e, url) {
     if (err) throw err;
     console.log('setWallpaper.py finished.');
     console.log('results', results);
+    console.log(results[4])
     mainWindow.webContents.send('download-finish');
   });
 
